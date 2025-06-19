@@ -1,0 +1,36 @@
+{
+  "ProjectA": {
+    "2025-06-18": [
+      "report-2025-06-18-09AM.html",
+      "report-2025-06-18-11AM.html",
+      "report-2025-06-18-02PM.html"
+    ],
+    "2025-06-17": [
+      "report-2025-06-17-10AM.html",
+      "report-2025-06-17-03PM.html"
+    ],
+    "2025-06-16": [
+      "report-2025-06-16-08AM.html"
+    ]
+  },
+  "ProjectB": {
+    "2025-06-18": [
+      "report-2025-06-18-07AM.html",
+      "report-2025-06-18-01PM.html"
+    ],
+    "2025-06-16": [
+      "report-2025-06-16-08AM.html",
+      "report-2025-06-16-12PM.html"
+    ]
+  },
+  "ProjectC": {
+    "2025-06-17": [
+      "report-2025-06-17-09AM.html",
+      "report-2025-06-17-11AM.html",
+      "report-2025-06-17-04PM.html"
+    ],
+    "2025-06-15": [
+      "report-2025-06-15-10AM.html"
+    ]
+  }
+}

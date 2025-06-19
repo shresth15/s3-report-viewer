@@ -1,0 +1,206 @@
+# File Placement Guide
+
+## 1. Main App File
+**Location:** `src/App.js`
+**Action:** Replace entire content with the React code from the first artifact
+
+## 2. Reports Configuration  
+**Location:** `public/reports.json`
+**Content:**
+```json
+{
+  "ProjectA": {
+    "2025-06-18": [
+      "report-2025-06-18-09AM.html",
+      "report-2025-06-18-11AM.html",
+      "report-2025-06-18-02PM.html"
+    ],
+    "2025-06-17": [
+      "report-2025-06-17-10AM.html",
+      "report-2025-06-17-03PM.html"
+    ]
+  },
+  "ProjectB": {
+    "2025-06-18": [
+      "report-2025-06-18-07AM.html",
+      "report-2025-06-18-01PM.html"
+    ],
+    "2025-06-16": [
+      "report-2025-06-16-08AM.html"
+    ]
+  }
+}
+```
+
+## 3. Demo Report Files
+Create these folders and files in the `public/` directory:
+
+### Folder Structure:
+```
+public/
+├── reports.json
+└── demo-reports/
+    ├── ProjectA/
+    │   ├── 2025-06-18/
+    │   │   ├── report-2025-06-18-09AM.html
+    │   │   ├── report-2025-06-18-11AM.html
+    │   │   └── report-2025-06-18-02PM.html
+    │   └── 2025-06-17/
+    │       ├── report-2025-06-17-10AM.html
+    │       └── report-2025-06-17-03PM.html
+    └── ProjectB/
+        ├── 2025-06-18/
+        │   ├── report-2025-06-18-07AM.html
+        │   └── report-2025-06-18-01PM.html
+        └── 2025-06-16/
+            └── report-2025-06-16-08AM.html
+```
+
+## 4. Sample HTML Report Content
+For each HTML file above, use this template:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sample Report</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 20px; 
+            background: #f5f5f5;
+        }
+        .header { 
+            background: #2563eb; 
+            color: white; 
+            padding: 20px; 
+            border-radius: 8px; 
+            margin-bottom: 20px;
+        }
+        .content { 
+            background: white; 
+            padding: 20px; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            margin-top: 15px; 
+        }
+        th, td { 
+            border: 1px solid #ddd; 
+            padding: 12px; 
+            text-align: left; 
+        }
+        th { 
+            background: #f8f9fa; 
+            font-weight: bold;
+        }
+        .status-good { color: #16a34a; }
+        .status-warning { color: #ea580c; }
+        .status-excellent { color: #059669; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>📊 Project Report</h1>
+        <p><strong>Project:</strong> [PROJECT_NAME]</p>
+        <p><strong>Date:</strong> [REPORT_DATE]</p>
+        <p><strong>Time:</strong> [REPORT_TIME]</p>
+    </div>
+    
+    <div class="content">
+        <h2>📈 Summary</h2>
+        <p>This is a demo report showing project metrics and status updates for local testing.</p>
+        
+        <h2>📊 Key Metrics</h2>
+        <table>
+            <tr>
+                <th>Metric</th>
+                <th>Value</th>
+                <th>Status</th>
+                <th>Trend</th>
+            </tr>
+            <tr>
+                <td>Tasks Completed</td>
+                <td>23</td>
+                <td><span class="status-good">✅ Good</span></td>
+                <td>📈 +12%</td>
+            </tr>
+            <tr>
+                <td>Issues Found</td>
+                <td>2</td>
+                <td><span class="status-warning">⚠️ Attention</span></td>
+                <td>📉 -3</td>
+            </tr>
+            <tr>
+                <td>Performance Score</td>
+                <td>94%</td>
+                <td><span class="status-excellent">🎯 Excellent</span></td>
+                <td>📈 +5%</td>
+            </tr>
+            <tr>
+                <td>User Satisfaction</td>
+                <td>4.8/5</td>
+                <td><span class="status-excellent">⭐ Outstanding</span></td>
+                <td>📈 +0.2</td>
+            </tr>
+        </table>
+        
+        <h2>📝 Recent Activities</h2>
+        <ul>
+            <li>✅ Deployed new feature updates</li>
+            <li>🔧 Fixed critical authentication bug</li>
+            <li>📊 Updated dashboard analytics</li>
+            <li>🚀 Performance optimizations implemented</li>
+            <li>👥 Team onboarding completed</li>
+        </ul>
+
+        <h2>🎯 Next Steps</h2>
+        <ol>
+            <li>Review and address the 2 open issues</li>
+            <li>Continue performance monitoring</li>
+            <li>Prepare for next sprint planning</li>
+            <li>Update documentation</li>
+        </ol>
+
+        <h2>📞 Contact Information</h2>
+        <p><strong>Report Generated:</strong> [CURRENT_TIMESTAMP]</p>
+        <p><strong>Generated By:</strong> Automated Report System</p>
+        <p><strong>Next Report:</strong> Tomorrow at same time</p>
+    </div>
+</body>
+</html>
+```
+
+## 5. Quick Setup Commands
+
+If you want to create all the folders and files quickly:
+
+### On Windows (Command Prompt):
+```cmd
+cd public
+mkdir demo-reports
+mkdir demo-reports\ProjectA
+mkdir demo-reports\ProjectA\2025-06-18
+mkdir demo-reports\ProjectA\2025-06-17
+mkdir demo-reports\ProjectB
+mkdir demo-reports\ProjectB\2025-06-18
+mkdir demo-reports\ProjectB\2025-06-16
+```
+
+### On Mac/Linux (Terminal):
+```bash
+cd public
+mkdir -p demo-reports/ProjectA/2025-06-18
+mkdir -p demo-reports/ProjectA/2025-06-17
+mkdir -p demo-reports/ProjectB/2025-06-18
+mkdir -p demo-reports/ProjectB/2025-06-16
+```
+
+Then create the HTML files using the template above, replacing:
+- `[PROJECT_NAME]` with ProjectA or ProjectB
+- `[REPORT_DATE]` with the actual date
+- `[REPORT_TIME]` with the time from filename
+- `[CURRENT_TIMESTAMP]` with current date/time
