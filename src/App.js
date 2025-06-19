@@ -51,7 +51,7 @@ const App = () => {
     setReportUrl('');
   };
 
-  // Handle date selection
+  // Handle date selection - now works with date picker
   const handleDateChange = (e) => {
     const date = e.target.value;
     setSelectedDate(date);
@@ -84,7 +84,7 @@ const App = () => {
     return reportsData ? Object.keys(reportsData) : [];
   };
 
-  // Get available dates for selected project
+  // Get available dates for selected project (for validation)
   const getDates = () => {
     if (!reportsData || !selectedProject) return [];
     return Object.keys(reportsData[selectedProject] || {});
@@ -94,6 +94,24 @@ const App = () => {
   const getReports = () => {
     if (!reportsData || !selectedProject || !selectedDate) return [];
     return reportsData[selectedProject]?.[selectedDate] || [];
+  };
+
+  // Check if selected date has reports available
+  const isDateValid = () => {
+    if (!selectedDate || !selectedProject) return false;
+    return getDates().includes(selectedDate);
+  };
+
+  // Get min and max dates for the date picker
+  const getDateRange = () => {
+    const availableDates = getDates();
+    if (availableDates.length === 0) return { min: '', max: '' };
+    
+    const sortedDates = availableDates.sort();
+    return {
+      min: sortedDates[0],
+      max: sortedDates[sortedDates.length - 1]
+    };
   };
 
   // Custom dropdown component
@@ -128,6 +146,33 @@ const App = () => {
     </div>
   );
 
+  // Custom date picker component
+  const DatePicker = ({ 
+    id, 
+    value, 
+    onChange, 
+    disabled, 
+    icon: Icon,
+    min,
+    max
+  }) => (
+    <div className="datepicker-container">
+      <div className="dropdown-icon">
+        <Icon size={18} />
+      </div>
+      <input
+        type="date"
+        id={id}
+        value={value}
+        onChange={onChange}
+        disabled={disabled}
+        min={min}
+        max={max}
+        className={`datepicker-input ${disabled ? 'disabled' : ''} ${!isDateValid() && value ? 'invalid' : ''}`}
+      />
+    </div>
+  );
+
   if (loading) {
     return (
       <div className="loading-container">
@@ -138,6 +183,8 @@ const App = () => {
       </div>
     );
   }
+
+  const dateRange = getDateRange();
 
   return (
     <div className="app-container">
@@ -150,7 +197,7 @@ const App = () => {
             </div>
             <div className="logo-text">
               <h1>Report Viewer</h1>
-              <p>View project reports from AWS S3</p>
+              <p>View project reports</p>
             </div>
           </div>
         </div>
@@ -189,18 +236,23 @@ const App = () => {
               />
             </div>
 
-            {/* Date Selector */}
+            {/* Date Picker */}
             <div className="control-group">
               <label htmlFor="date">Date</label>
-              <Dropdown
+              <DatePicker
                 id="date"
                 value={selectedDate}
                 onChange={handleDateChange}
-                options={getDates()}
-                placeholder="Choose a date"
                 disabled={!selectedProject}
                 icon={Calendar}
+                min={dateRange.min}
+                max={dateRange.max}
               />
+              {selectedDate && !isDateValid() && (
+                <p className="date-warning">
+                  No reports available for this date. Available dates: {getDates().join(', ')}
+                </p>
+              )}
             </div>
 
             {/* Report Selector */}
@@ -212,7 +264,7 @@ const App = () => {
                 onChange={handleReportChange}
                 options={getReports()}
                 placeholder="Choose a report"
-                disabled={!selectedDate}
+                disabled={!selectedDate || !isDateValid()}
                 icon={FileText}
               />
             </div>

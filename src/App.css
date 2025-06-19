@@ -224,6 +224,74 @@ body {
   pointer-events: none;
 }
 
+/* Date Picker Styles */
+.datepicker-container {
+  position: relative;
+}
+
+.datepicker-input {
+  width: 100%;
+  padding: 12px 12px 12px 40px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: white;
+  color: #111827;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.datepicker-input:focus {
+  outline: none;
+  ring: 2px;
+  ring-color: #3b82f6;
+  border-color: #3b82f6;
+}
+
+.datepicker-input:hover:not(.disabled) {
+  border-color: #9ca3af;
+}
+
+.datepicker-input.disabled {
+  background: #f9fafb;
+  cursor: not-allowed;
+  color: #6b7280;
+}
+
+.datepicker-input.invalid {
+  border-color: #ef4444;
+  background-color: #fef2f2;
+}
+
+.datepicker-input::-webkit-calendar-picker-indicator {
+  position: absolute;
+  right: 12px;
+  color: #9ca3af;
+  cursor: pointer;
+}
+
+.datepicker-input.disabled::-webkit-calendar-picker-indicator {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.date-warning {
+  margin-top: 8px;
+  font-size: 0.75rem;
+  color: #ef4444;
+  font-style: italic;
+  display: flex;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.date-warning::before {
+  content: "⚠";
+  font-style: normal;
+  flex-shrink: 0;
+}
+
 /* Selected Report Info */
 .selected-report-info {
   margin-top: 24px;
